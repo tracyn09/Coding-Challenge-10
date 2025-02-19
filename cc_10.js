@@ -42,8 +42,9 @@ console.log(prod1.getDetails())
 
 //Task 3
 class Inventory {
-    constructor(products = []) {
+    constructor(products= [], orders =[]) {
         this.products = products
+        this.orders = orders
     }
 
 addProduct(product) {
@@ -54,8 +55,27 @@ listProducts() {
         console.log(product.getDetails())
     })
 }
+
+//Task 4
+placeOrder(orderId, product, quantity) {
+    if (product.stock >= quantity) {
+        const orderDetails = {orderId, product:product.name, quantity, totalPrice:product.price * quantity
+        }
+        this.orders.push(orderDetails)
+        product.updateStock(quantity)
+    } 
 }
-//Test Case
+listOrders() {
+    this.orders.forEach(order => {
+        console.log(`Order ID: ${order.orderId}, Product: ${order.product}, Quantity: ${order.quantity}, Total Price: $${order.totalPrice}`)
+    })
+}
+}
+//Test Case for Task 3
 const inventory = new Inventory();
 inventory.addProduct(prod1);
 inventory.listProducts()
+//Test Case for Task 4
+inventory.placeOrder(601, prod1, 2);
+inventory.listOrders()
+console.log(prod1.getDetails())
