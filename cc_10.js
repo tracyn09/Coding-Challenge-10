@@ -70,6 +70,14 @@ listOrders() {
         console.log(`Order ID: ${order.orderId}, Product: ${order.product}, Quantity: ${order.quantity}, Total Price: $${order.totalPrice}`)
     })
 }
+
+//Task 5
+restockProduct(productId, quantity) {
+    const product = this.products.find(p => p.id === productId)
+    if (product) {
+        product.stock += quantity
+    }
+}
 }
 //Test Case for Task 3
 const inventory = new Inventory();
@@ -78,4 +86,7 @@ inventory.listProducts()
 //Test Case for Task 4
 inventory.placeOrder(601, prod1, 2);
 inventory.listOrders()
+console.log(prod1.getDetails())
+//Test Case for Task 5
+inventory.restockProduct(101, 5);
 console.log(prod1.getDetails())
